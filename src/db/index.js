@@ -5,7 +5,7 @@ const pool = new Pool({
 })
 
 const db = {
-  ...require('./items')(pool),
+  ...require('./todos')(pool),
   ...require('./users')(pool),
 }
 
@@ -18,11 +18,12 @@ db.initialise = async () => {
     )
   `)
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS Items (
+    CREATE TABLE IF NOT EXISTS Todos (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(100) NOT NULL,
-      quantity INTEGER NOT NULL,
+      task VARCHAR(100) NOT NULL,
       uid INTEGER NOT NULL,
+      access INTEGER[] NOT NULL,
+      softdelete BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (uid) REFERENCES Users(id)
     )
   `)

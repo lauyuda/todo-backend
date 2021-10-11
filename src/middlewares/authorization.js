@@ -1,16 +1,14 @@
 module.exports = (db) => {
   return async (req, res, next) => {
     const uid = req.uid
-    const id = req.params.id
-    // console.log('req params: ', req.params)
-    // console.log('uid', uid)
+    const tid = req.params.tid
 
-    const isOwner = await db.findItemOwner(id, uid)
+    const isAccess = await db.findIsAccess(tid, uid)
 
-    if (isOwner) {
+    if (isAccess) {
       next()
     } else {
-      res.status(400).send(`User ${uid} does not have access`)
+      res.status(403).send(`User ${uid} does not have access`)
     }
   }
 }

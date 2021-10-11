@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:jest/recommended"],
   "parserOptions": {
     "ecmaVersion": 12
   },
@@ -15,6 +15,10 @@
       { "vars": "all", "args": "none", "ignoreRestSiblings": false }
     ],
     "semi": ["error", "never"],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "jest/expect-expect": [
+      "error",
+      { "assertFunctionNames": ["expect", "request.**.expect"] }
+    ]
   }
 }
