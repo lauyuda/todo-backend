@@ -18,5 +18,5 @@ yarn-error.log*
 .vscode
 
 # Environment files
-# .env*
+.env*
 !.env.example
